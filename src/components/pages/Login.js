@@ -22,11 +22,12 @@ const Login = () => {
         })
         const payload = await response.json()
         if (response.status >= 400) {
+          console.log("Login didn't work.")
             setAuth(false)
         } else {
             sessionStorage.setItem('token', payload.token)
 
-            let { from } = location.state || { from: { pathname: "/" } };
+            let { from } = location.state || { from: { pathname: "/submissions" } };
             history.replace(from);
         }
     }
@@ -34,7 +35,7 @@ const Login = () => {
     return (
         <Container>
         {!auth && 
-            <Card className="text-white bg-primary my-5 py-4 text-center">
+            <Card className="text-white header my-5 py-4 text-center">
             <CardBody>
                 <CardText className="text-white m-0">Invalid credentials, please try again</CardText>
             </CardBody>

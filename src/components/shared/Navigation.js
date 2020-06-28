@@ -10,7 +10,7 @@ const Navigation = () => {
     return (
         <Navbar dark color="dark" expand="md" fixed="top">
             <Container>
-            <NavbarBrand href="">Example Portfolio Site</NavbarBrand>
+            <NavbarBrand href="">Zach Stock</NavbarBrand>
             <NavbarToggler onClick={toggle} />
             <Collapse isOpen={isOpen} navbar>
                 <Nav className="ml-auto" navbar>
@@ -18,10 +18,13 @@ const Navigation = () => {
                         <NavLink tag={RouteLink} to="/">Home</NavLink>
                     </NavItem>
                     <NavItem>
-                        <NavLink tag={RouteLink} to="/about">About Me</NavLink>
+                        <NavLink tag={RouteLink} to="/resume">Resume</NavLink>
                     </NavItem>
                     <NavItem>
-                       <NavLink tag={RouteLink} to="/contact">Contact Us</NavLink>
+                       <NavLink tag={RouteLink} to="/portfolio">Portfolio</NavLink>
+                    </NavItem>
+                    <NavItem>
+                       <NavLink tag={RouteLink} to="/contact">Contact</NavLink>
                     </NavItem>
                     <NavItem>
                         <NavLink tag={RouteLink} to="/submissions">Submissions</NavLink>

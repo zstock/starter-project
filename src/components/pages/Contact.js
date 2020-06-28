@@ -1,13 +1,13 @@
 import React, { useState } from 'react'
-import { Form, FormGroup, Col, Input, Label, Button, Container, CardBody, Card, CardText } from 'reactstrap'
-
-
+import { Container, Card, CardBody, CardText } from 'reactstrap'
 
 const Contact = () => {
     const [name, setName] = useState("")
     const [email, setEmail] = useState("")
     const [phoneNumber, setPhoneNumber] = useState("")
     const [content, setContent] = useState("")
+    const [showResponse, setShowResponse] = useState(true)
+    const [output, setOutput] = useState("");
 
     const formSubmit = async event => {
         event.preventDefault()
@@ -21,51 +21,86 @@ const Contact = () => {
         })
         const payload = await response.json()
         if (response.status >= 400) {
-            alert(`Oops! Error: ${payload.message} for fields: ${payload.invalid.join(",")}`)
+            //alert(`Oops! Error: ${payload.message} for fields: ${payload.invalid.join(",")}`)
+            console.log(payload.invalid);
+            setOutput(`Oops! Error: ${payload.message} for fields: ${payload.invalid.join(", ")}`);
+            setShowResponse(false);
         } else {
-            alert(`Congrats! Submission submitted with id: ${payload.id}`)
+            //alert(`Congrats! Submission submitted with id: ${payload.id}`)
+            setOutput(`Congrats! Submission submitted with id: ${payload.id}`);
+            setShowResponse(false);
         }
     }
 
     return (
         <Container>
-            <Card className="text-white bg-secondary my-5 py-4 text-center">
+        <div className="container center-children">
+            <img
+                className="envelope"
+                src={require("../../envelope.png")}
+                width={256}
+                height={256}
+                alt="Envelope img."
+            />
+            <form className="contact">
+                <label htmlFor="fname">
+                    <b>First Name</b>
+                </label>
+                <br />
+                <input
+                    type="text"
+                    id="fname"
+                    placeholder="Name..."
+                    onChange={e => setName(e.target.value) }
+                />
+                <br />
+                <label htmlFor="pNumber">
+                    <b>Phone Number</b>
+                </label>
+                <br />
+                <input
+                    type="text"
+                    id="pNumber"
+                    placeholder="Phone Number..."
+                    onChange={e => setPhoneNumber(e.target.value) }
+                />
+                <br />
+                <label htmlFor="email">
+                    <b>Email Address</b>
+                </label>
+                <br />
+                <input
+                    type="email"
+                    id="email"
+                    placeholder="example@gmail.com"
+                    onChange={e => setEmail(e.target.value) }
+                />
+                <br />
+                <label htmlFor="msg">
+                    <b>Message</b>
+                </label>
+                <br />
+                <textarea
+                    rows={3}
+                    cols={30}
+                    id="msg"
+                    placeholder="Tell me something!"
+                    defaultValue={""}
+                    onChange={e => setContent(e.target.value) }
+                />
+                <button type="button" className="submit" onClick={formSubmit}>
+                    Submit!
+                </button>
+                <div id="resultMsg" />
+            </form>
+        </div>
+        {!showResponse && 
+            <Card className="text-white header my-5 py-4 text-center">
                 <CardBody>
-                    <CardText className="text-white m-0">Use form to reach me, I'll get back to you within 24 hours!</CardText>
+                    <CardText className="text-white m-0">{ output }</CardText>
                 </CardBody>
             </Card>
-            <Form className="my-5" onSubmit={formSubmit}>
-                <FormGroup row>
-                    <Label for="emailEntry" sm={2}>Email</Label>
-                    <Col sm={10}>
-                    <Input type="email" name="email" id="emailEntry" placeholder="Enter email to contact"  required value={email} onChange={e => setEmail(e.target.value) }/>
-                    </Col>
-                </FormGroup>
-                <FormGroup row>
-                    <Label for="phoneEntry" sm={2}>Phone Number</Label>
-                    <Col sm={10}>
-                    <Input type="phone" name="phone" id="phoneEntry" placeholder="Enter phone number" value={phoneNumber} onChange={e => setPhoneNumber(e.target.value)}/>
-                    </Col>
-                </FormGroup>
-                <FormGroup row>
-                    <Label for="nameEntry" sm={2}>Full Name</Label>
-                    <Col sm={10}>
-                    <Input type="name" name="name" id="nameEntry" placeholder="Enter your full name" required value={name} onChange={e => setName(e.target.value)}/>
-                    </Col>
-                </FormGroup>
-
-                <FormGroup row>
-                    <Label for="messageEntry" sm={2}>Message</Label>
-                    <Col sm={10}>
-                    <Input type="textarea" name="text" id="messageEntry" required value={content} onChange={e => setContent(e.target.value)}/>
-                    </Col>
-                </FormGroup>
-                <FormGroup check row>
-                    <Col sm={{ size: 10, offset: 2 }}>
-                    <Button color="success">Submit</Button>
-                    </Col>
-                </FormGroup>
-            </Form>
+        }
         </Container>
       )
     }
