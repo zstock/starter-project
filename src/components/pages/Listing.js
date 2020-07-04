@@ -23,7 +23,6 @@ const Listings = () => {
                 }
             })
             const data = await response.json()
-            console.log(data);
             setListing(data)
         }
         getData()
