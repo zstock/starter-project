@@ -44,7 +44,7 @@ footer{
 /*End of Header*/
 
 /*Text*/
-h1, h2, h3, h4{
+h1, h2, h3, h4, td, th{
   font-family: Trebuchet, Helvetica, sans-serif;
   color: ghostwhite;
 }
@@ -88,13 +88,13 @@ p, b, i{
 
 /*Links*/
 a:link {
-  color: #393939;
+  color: #cbff0d;
 }
 a:visited {
   color: #393939;
 }
 a:hover {
-  color: #393939;
+  color: #ff0f0f;
   background-color: #FF5a09;
   border-radius: 3px;
 }

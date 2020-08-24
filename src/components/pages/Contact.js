@@ -27,7 +27,7 @@ const Contact = () => {
             setShowResponse(false);
         } else {
             //alert(`Congrats! Submission submitted with id: ${payload.id}`)
-            setOutput(`Congrats! Submission submitted with id: ${payload.id}`);
+            setOutput(`Congrats! Message submitted!`);
             setShowResponse(false);
         }
     }

@@ -10,6 +10,7 @@ import Contact from './components/pages/Contact'
 import Login from './components/pages/Login'
 import Listing from './components/pages/Listing'
 import PrivateRoute from './components/shared/PrivateRoute'
+import mysql from 'mysql'
 
 function App() {
   return (
